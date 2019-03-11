@@ -9,6 +9,8 @@ f = open('10milpwlist.txt','r')
 count = 1
 #the file is formatted with one password per line.
 for line in f:
+	#we need to strip the carriage return line feed before submitting the password to the web server.
+	line = line.rstrip()
 	#this website only has a password parameter to test. If I was to use a username and password,
 	#I would utlize a second username file and a nested loop, with an additional dictionary entry
 	#of 'username':str(user), based on the line item variable assigned for the usernames.
@@ -16,7 +18,7 @@ for line in f:
 	#this is unique to this particular webpage and the returned html starts with 'Invalid password!'
 	#so should I find a successful password, the inclination is to believe that it wouldn't contain that string.
 	if 'Invalid password!' not in r.text:
-		print ('The password is ' + line)
+		print ('The password is ' + str(line))
 		break
 	else:
 		print (str(count) + ' incorrect passwords attempted.')
